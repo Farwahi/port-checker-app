@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Filtered IP List</title>
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/tailwindcss@3/dist/tailwind.min.css">
+</head>
+<body class="bg-slate-100 p-6">
+
+  <nav style="margin-bottom: 20px;">
+    <a href="index.html" style="margin-right: 20px;">⬅ Back to Port Scanner</a>
+    <a href="filtered.html">📋 Filtered IP List</a>
+  </nav>
+
+  <div class="max-w-4xl mx-auto bg-white rounded-xl shadow p-6">
+    <h1 class="text-2xl font-bold mb-4">Filtered / Unknown Ports</h1>
+
+    <div class="flex gap-4 mb-4">
+      <a href="/filtered/export/csv"
+         class="px-4 py-2 rounded bg-blue-600 text-white hover:bg-blue-700">
+        Download CSV
+      </a>
+      <a href="/filtered/export/xlsx"
+         class="px-4 py-2 rounded bg-green-600 text-white hover:bg-green-700">
+        Download Excel
+      </a>
+    </div>
+
+    <table class="min-w-full table-auto border">
+      <thead class="bg-slate-200">
+        <tr>
+          <th class="p-2 border">IP</th>
+          <th class="p-2 border">Port</th>
+          <th class="p-2 border">Protocol</th>
+          <th class="p-2 border">Timestamp</th>
+        </tr>
+      </thead>
+      <tbody id="tbl" class="text-center"></tbody>
+    </table>
+  </div>
+
+  <script>
+    async function load() {
+      const res  = await fetch('/filtered');
+      const list = await res.json();
+      document.getElementById('tbl').innerHTML = list.map(r => `
+        <tr>
+          <td class="border p-1">${r.ip}</td>
+          <td class="border p-1">${r.port}</td>
+          <td class="border p-1">${r.protocol}</td>
+          <td class="border p-1">
+            ${new Date(r.timeISO).toLocaleString()}
+          </td>
+        </tr>`).join('');
+    }
+    load();
+  </script>
+</body>
+</html>

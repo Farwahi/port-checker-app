@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Port Checker (TCP & UDP)</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <nav class="navbar">
+    <div class="container nav-container">
+      <a href="index.html" class="nav-logo">🔍 Port Scanner</a>
+      <a href="filtered.html" class="nav-link">📋 Filtered IP List</a>
+    </div>
+  </nav>
+
+  <main class="container main-container">
+    <h1 class="title">Port 5060 Checker (TCP & UDP)</h1>
+
+    <label for="ipInput" class="label">Enter IPs (comma-separated):</label>
+    <textarea
+      id="ipInput"
+      placeholder="e.g. 8.8.8.8, 1.1.1.1"
+      class="input-textarea"
+      spellcheck="false"
+      rows="3"></textarea>
+
+    <label for="portInput" class="label">Enter Ports (comma-separated):</label>
+    <input
+      type="text"
+      id="portInput"
+      placeholder="e.g. 5060 or 5060,80"
+      class="input-text" />
+
+    <label for="protocolInput" class="label">Select Protocol:</label>
+    <select id="protocolInput" class="input-select">
+      <option value="tcp">TCP</option>
+      <option value="udp">UDP</option>
+    </select>
+
+    <button id="checkBtn" class="btn-primary" onclick="checkBatch()">Check Ports</button>
+
+    <section id="result" class="result"></section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
